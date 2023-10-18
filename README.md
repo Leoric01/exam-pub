@@ -1,6 +1,5 @@
 # exam-pub
-Pub simulation
-1.Struktura api: 
+Pub simulation:
 1. GET /users 
 Vraci vsechny objekty User s atributy: 
 a. Id 
