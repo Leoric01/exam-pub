@@ -15,6 +15,16 @@ public class Order {
     @ManyToOne
     private User user;
 
+    public Order() {
+    }
+
+    public Order(String productName, int amount, double price, User user) {
+        this.productName = productName;
+        this.amount = amount;
+        this.price = price;
+        this.user = user;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
