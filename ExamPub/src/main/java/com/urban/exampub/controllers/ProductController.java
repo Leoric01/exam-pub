@@ -1,6 +1,7 @@
 package com.urban.exampub.controllers;
 
 import com.urban.exampub.models.DTOs.BuyRequestDto;
+import com.urban.exampub.models.DTOs.DrinkRequestDto;
 import com.urban.exampub.models.Drink;
 import com.urban.exampub.services.DrinkService;
 import com.urban.exampub.services.OrderService;
@@ -33,5 +34,9 @@ public class ProductController {
   @PostMapping("/buy")
   public ResponseEntity<?> buyDrink(@RequestBody BuyRequestDto buyReq) {
     return orderService.buyDrink(buyReq);
+  }
+  @PostMapping("/drink")
+  public ResponseEntity<?> createDrink(@RequestBody DrinkRequestDto drinkRequestDto){
+    return drinkService.createDrink(drinkRequestDto);
   }
 }
