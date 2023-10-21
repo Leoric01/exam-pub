@@ -12,5 +12,8 @@ public interface DrinkService {
     ResponseEntity<List<Drink>> getAllDrinks();
 
     ResponseEntity<List<DrinkSummaryAll>> summaryAll();
+
+    ResponseEntity<?> summarySpecificProduct(String product);
+
 }
 

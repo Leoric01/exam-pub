@@ -6,6 +6,7 @@ import com.urban.exampub.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +27,13 @@ public class SummariesController {
     @GetMapping("/all")
     public ResponseEntity<List<DrinkSummaryAll>> summaryAll(){
        return drinkService.summaryAll();
+    }
+    @GetMapping("/{product}")
+    public ResponseEntity<?> summarySpecificProduct(@PathVariable String product){
+        return drinkService.summarySpecificProduct(product);
+    }
+    @GetMapping("/user")
+    public ResponseEntity<?> summaryUsersOrders(){
+        return orderService.allOrdersByUsers();
     }
 }
