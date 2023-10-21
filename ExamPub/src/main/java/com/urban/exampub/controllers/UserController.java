@@ -13,18 +13,20 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserService userService;
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-    @GetMapping("/users")
-    public ResponseEntity<List<UsersDto>> listUsers() {
-        return ResponseEntity.ok(userService.getAllUserDto());
-    }
+  private final UserService userService;
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<?> userDetail(@PathVariable Long id){
-        return userService.getUserDetail(id);
-    }
+  @Autowired
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
+
+  @GetMapping("/users")
+  public ResponseEntity<List<UsersDto>> listUsers() {
+    return ResponseEntity.ok(userService.getAllUserDto());
+  }
+
+  @GetMapping("/users/{id}")
+  public ResponseEntity<?> userDetail(@PathVariable Long id) {
+    return userService.getUserDetail(id);
+  }
 }

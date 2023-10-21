@@ -16,20 +16,22 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    private final DrinkService drinkService;
-    private final OrderService orderService;
-    @Autowired
-    public ProductController(DrinkService drinkService, OrderService orderService) {
-        this.drinkService = drinkService;
-        this.orderService = orderService;
-    }
+  private final DrinkService drinkService;
+  private final OrderService orderService;
 
-    @GetMapping("/drink-menu")
-    public ResponseEntity<List<Drink>> drinkMenu(){
-        return drinkService.getAllDrinks();
-    }
-    @PostMapping("/buy")
-    public ResponseEntity<?> buyDrink(@RequestBody BuyRequestDto buyReq){
-        return orderService.buyDrink(buyReq);
-    }
+  @Autowired
+  public ProductController(DrinkService drinkService, OrderService orderService) {
+    this.drinkService = drinkService;
+    this.orderService = orderService;
+  }
+
+  @GetMapping("/drink-menu")
+  public ResponseEntity<List<Drink>> drinkMenu() {
+    return drinkService.getAllDrinks();
+  }
+
+  @PostMapping("/buy")
+  public ResponseEntity<?> buyDrink(@RequestBody BuyRequestDto buyReq) {
+    return orderService.buyDrink(buyReq);
+  }
 }
