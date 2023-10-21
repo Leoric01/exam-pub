@@ -43,20 +43,20 @@ public class DrinkServiceImpl implements DrinkService {
       String productName = order.getProductName();
       OrderDto orderDto = new OrderDto(order.getId(),order.getProductName(),order.getAmount(),order.getPrice());
       if (drinkSummaryMap.containsKey(productName)) {
-        List<OrderDto> orderDtos = new ArrayList<>();
         DrinkSummaryAll existingSummary = drinkSummaryMap.get(productName);
         existingSummary.setAmount(existingSummary.getAmount() + order.getAmount());
         existingSummary.setSummaryPrice(
             existingSummary.getSummaryPrice() + (order.getAmount() * order.getPrice()));
-        existingSummary.setOrders(orderDtos);
         existingSummary.getOrders().add(orderDto);
       } else {
+        List<OrderDto> orderDtos = new ArrayList<>();
         DrinkSummaryAll drinkSummary = new DrinkSummaryAll();
         drinkSummary.setProduct(productName);
         drinkSummary.setAmount(order.getAmount());
         drinkSummary.setUnitPrice(order.getPrice());
         drinkSummary.setSummaryPrice(order.getAmount() * order.getPrice());
         drinkSummaryMap.put(productName, drinkSummary);
+        drinkSummary.setOrders(orderDtos);
         drinkSummary.getOrders().add(orderDto);
       }
     }
