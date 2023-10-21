@@ -1,6 +1,8 @@
 package com.urban.exampub.services;
 
 import com.urban.exampub.models.DTOs.BuyRequestDto;
+import com.urban.exampub.models.DTOs.summaryuser.OrderResponseDto;
+import com.urban.exampub.models.DTOs.summaryuser.OrderSummaryDto;
 import com.urban.exampub.models.Drink;
 import com.urban.exampub.models.ErrorResponse;
 import com.urban.exampub.models.User;
@@ -10,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -55,6 +59,20 @@ public class OrderServiceImpl implements OrderService {
           .body(new ErrorResponse("Drink is for adults and user is not an adult"));
     }
     return ResponseEntity.status(200).build();
+  }
+
+  @Override
+  public ResponseEntity<List<OrderSummaryDto>> allOrdersByUsers() {
+    List<User> userList = userRepository.findAll();
+    List<OrderSummaryDto> response = userList.stream()
+            .map(user -> {
+              List<OrderResponseDto> orderResponseDtos = user.getOrders().stream()
+                      .map(order -> new OrderResponseDto(order.getProductName(), order.getPrice()))
+                      .collect(Collectors.toList());
+              return new OrderSummaryDto(user.getId(), orderResponseDtos);
+            })
+            .collect(Collectors.toList());
+    return ResponseEntity.status(200).body(response);
   }
 }
 

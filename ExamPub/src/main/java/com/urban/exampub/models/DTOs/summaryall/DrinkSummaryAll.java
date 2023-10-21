@@ -1,10 +1,15 @@
-package com.urban.exampub.models.DTOs;
+package com.urban.exampub.models.DTOs.summaryall;
+
+import com.urban.exampub.models.DTOs.OrderDto;
+
+import java.util.List;
 
 public class DrinkSummaryAll {
     private String product;
     private int amount;
     private double unitPrice;
     private double summaryPrice;
+    private List<OrderDto> orders;
 
     public DrinkSummaryAll() {
     }
@@ -14,6 +19,14 @@ public class DrinkSummaryAll {
         this.amount = amount;
         this.unitPrice = unitPrice;
         this.summaryPrice = summaryPrice;
+    }
+
+    public List<OrderDto> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderDto> orders) {
+        this.orders = orders;
     }
 
     public String getProduct() {
