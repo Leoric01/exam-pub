@@ -1,30 +1,27 @@
-package com.urban.exampub.models;
+package com.urban.exampub.models.DTOs;
 
-import jakarta.persistence.*;
-
-
-@Entity
-@Table(name = "orders")
-public class Order {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderDto {
     private Long id;
     private String productName;
     private int amount;
-
     private double price;
-    @ManyToOne
-    private User user;
 
-    public Order() {
+    public OrderDto() {
     }
 
-    public Order(String productName, int amount, double price, User user) {
+    public OrderDto(Long id, String productName, int amount, double price) {
+        this.id = id;
         this.productName = productName;
         this.amount = amount;
         this.price = price;
-        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProductName() {
@@ -50,20 +47,5 @@ public class Order {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
+
