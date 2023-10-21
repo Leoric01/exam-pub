@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -65,18 +66,14 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public ResponseEntity<List<OrderSummaryDto>> allOrdersByUsers() {
     List<User> userList = userRepository.findAll();
-    List<OrderSummaryDto> response = new ArrayList<>();
-    for (User user : userList){
-      OrderSummaryDto orderSummaryDto = new OrderSummaryDto();
-      orderSummaryDto.setUserId(user.getId());
-      List<OrderResponseDto> orderResponseDtos = new ArrayList<>();
-      for (Order order : user.getOrders()){
-        OrderResponseDto orderResponseDto = new OrderResponseDto(order.getProductName(),order.getPrice());
-        orderResponseDtos.add(orderResponseDto);
-      }
-      orderSummaryDto.setOrderResponseDtos(orderResponseDtos);
-      response.add(orderSummaryDto);
-    }
+    List<OrderSummaryDto> response = userList.stream()
+            .map(user -> {
+              List<OrderResponseDto> orderResponseDtos = user.getOrders().stream()
+                      .map(order -> new OrderResponseDto(order.getProductName(), order.getPrice()))
+                      .collect(Collectors.toList());
+              return new OrderSummaryDto(user.getId(), orderResponseDtos);
+            })
+            .collect(Collectors.toList());
     return ResponseEntity.status(200).body(response);
   }
 }
