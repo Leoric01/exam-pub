@@ -10,12 +10,12 @@ public class UserOrderDto {
     private boolean isActive;
     private boolean isAdult;
     private double pocket;
-    private List<Order> orders;
+    private List<OrderDto> orders;
 
     public UserOrderDto() {
     }
 
-    public UserOrderDto(Long id, String name, boolean isActive, boolean isAdult, double pocket, List<Order> orders) {
+    public UserOrderDto(Long id, String name, boolean isActive, boolean isAdult, double pocket, List<OrderDto> orders) {
         this.id = id;
         this.name = name;
         this.isActive = isActive;
@@ -64,11 +64,11 @@ public class UserOrderDto {
         this.pocket = pocket;
     }
 
-    public List<Order> getOrders() {
+    public List<OrderDto> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<OrderDto> orders) {
         this.orders = orders;
     }
 }

@@ -1,16 +1,16 @@
 package com.urban.exampub.models.DTOs;
 
-public class UserDto {
+public class UsersDto {
     private Long id;
     private String name;
     private boolean isActive;
     private boolean isAdult;
     private double pocket;
 
-    public UserDto() {
+    public UsersDto() {
     }
 
-    public UserDto(Long id, String name, boolean isActive, boolean isAdult, double pocket) {
+    public UsersDto(Long id, String name, boolean isActive, boolean isAdult, double pocket) {
         this.id = id;
         this.name = name;
         this.isActive = isActive;

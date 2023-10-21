@@ -1,6 +1,6 @@
 package com.urban.exampub.controllers;
 
-import com.urban.exampub.models.DTOs.UserDto;
+import com.urban.exampub.models.DTOs.UsersDto;
 import com.urban.exampub.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,10 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> listUsers() {
+    public ResponseEntity<List<UsersDto>> listUsers() {
         return ResponseEntity.ok(userService.getAllUserDto());
     }
+
     @GetMapping("/users/{id}")
     public ResponseEntity<?> userDetail(@PathVariable Long id){
         return userService.getUserDetail(id);
