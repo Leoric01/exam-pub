@@ -1,11 +1,10 @@
 package com.urban.exampub.services;
 
 import com.urban.exampub.models.DTOs.BuyRequestDto;
-import com.urban.exampub.models.DTOs.OrderResponseDto;
-import com.urban.exampub.models.DTOs.OrderSummaryDto;
+import com.urban.exampub.models.DTOs.summaryuser.OrderResponseDto;
+import com.urban.exampub.models.DTOs.summaryuser.OrderSummaryDto;
 import com.urban.exampub.models.Drink;
 import com.urban.exampub.models.ErrorResponse;
-import com.urban.exampub.models.Order;
 import com.urban.exampub.models.User;
 import com.urban.exampub.repositories.DrinkRepository;
 import com.urban.exampub.repositories.UserRepository;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

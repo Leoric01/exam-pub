@@ -1,4 +1,4 @@
-package com.urban.exampub.models.DTOs;
+package com.urban.exampub.models.DTOs.summaryuser;
 
 public class OrderResponseDto {
   private String product;

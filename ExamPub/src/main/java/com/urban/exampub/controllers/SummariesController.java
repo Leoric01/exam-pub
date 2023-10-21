@@ -1,6 +1,6 @@
 package com.urban.exampub.controllers;
 
-import com.urban.exampub.models.DTOs.DrinkSummaryAll;
+import com.urban.exampub.models.DTOs.summaryall.DrinkSummaryAll;
 import com.urban.exampub.services.DrinkService;
 import com.urban.exampub.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,9 @@ public class SummariesController {
     public ResponseEntity<List<DrinkSummaryAll>> summaryAll(){
        return drinkService.summaryAll();
     }
-    @GetMapping("/{product}")
-    public ResponseEntity<?> summarySpecificProduct(@PathVariable String product){
-        return drinkService.summarySpecificProduct(product);
+    @GetMapping("/product")
+    public ResponseEntity<?> summaryAllProducts(){
+        return drinkService.summaryAllProducts();
     }
     @GetMapping("/user")
     public ResponseEntity<?> summaryUsersOrders(){

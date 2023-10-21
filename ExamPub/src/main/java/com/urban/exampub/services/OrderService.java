@@ -1,7 +1,7 @@
 package com.urban.exampub.services;
 
 import com.urban.exampub.models.DTOs.BuyRequestDto;
-import com.urban.exampub.models.DTOs.OrderSummaryDto;
+import com.urban.exampub.models.DTOs.summaryuser.OrderSummaryDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.urban.exampub.models.DTOs;
+package com.urban.exampub.models.DTOs.summaryproduct;
 
 public class ProductSpecificSummary {
     private Long userId;
