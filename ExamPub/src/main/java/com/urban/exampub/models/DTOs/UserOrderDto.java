@@ -1,29 +1,22 @@
-package com.urban.exampub.models;
+package com.urban.exampub.models.DTOs;
 
-import jakarta.persistence.*;
+import com.urban.exampub.models.Order;
 
 import java.util.List;
 
-
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserOrderDto {
     private Long id;
     private String name;
     private boolean isActive;
     private boolean isAdult;
     private double pocket;
-    private String password;
-    @OneToMany
     private List<Order> orders;
 
-    public User() {
+    public UserOrderDto() {
     }
 
-    public User(String name, boolean isActive, boolean isAdult, double pocket, List<Order> orders) {
+    public UserOrderDto(Long id, String name, boolean isActive, boolean isAdult, double pocket, List<Order> orders) {
+        this.id = id;
         this.name = name;
         this.isActive = isActive;
         this.isAdult = isAdult;
@@ -31,12 +24,12 @@ public class User {
         this.orders = orders;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -71,14 +64,6 @@ public class User {
         this.pocket = pocket;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public List<Order> getOrders() {
         return orders;
     }
@@ -86,5 +71,4 @@ public class User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-
 }
