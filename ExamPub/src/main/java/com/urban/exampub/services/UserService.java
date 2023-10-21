@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public interface UserService {
     List<UsersDto> getAllUserDto();
+
     List<User> getAllUser();
 
     ResponseEntity<?> getUserDetail(Long id);

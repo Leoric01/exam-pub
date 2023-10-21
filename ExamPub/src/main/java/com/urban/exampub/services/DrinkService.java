@@ -13,3 +13,4 @@ public interface DrinkService {
 
     ResponseEntity<List<DrinkSummaryAll>> summaryAll();
 }
+

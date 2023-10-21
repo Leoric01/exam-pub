@@ -1,26 +1,21 @@
 package com.urban.exampub.models.DTOs;
 
-import com.urban.exampub.models.Order;
-
-import java.util.List;
-
-public class UserOrderDto {
+public class UserDto {
     private Long id;
     private String name;
     private boolean isActive;
     private boolean isAdult;
     private double pocket;
-    private List<OrderDto> orders;
-    public UserOrderDto() {
+
+    public UserDto() {
     }
 
-    public UserOrderDto(Long id, String name, boolean isActive, boolean isAdult, double pocket, List<OrderDto> orders) {
+    public UserDto(Long id, String name, boolean isActive, boolean isAdult, double pocket) {
         this.id = id;
         this.name = name;
         this.isActive = isActive;
         this.isAdult = isAdult;
         this.pocket = pocket;
-        this.orders = orders;
     }
 
     public Long getId() {
@@ -61,12 +56,5 @@ public class UserOrderDto {
 
     public void setPocket(double pocket) {
         this.pocket = pocket;
-    }
-
-    public List<OrderDto> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderDto> orders) {
     }
 }
