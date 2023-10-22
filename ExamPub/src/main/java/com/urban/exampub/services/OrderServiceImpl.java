@@ -116,6 +116,8 @@ public class OrderServiceImpl implements OrderService {
     }
     Order order = new Order(drink.get().getProductName(), buyReq.getAmount(), buyReq.getPrice(), user.get());
     orderRepo.save(order);
+    user.get().setPocket(user.get().getPocket() - buyReq.getAmount() * buyReq.getPrice());
+    userRepository.save(user.get());
     return ResponseEntity.status(201).build();
   }
 }

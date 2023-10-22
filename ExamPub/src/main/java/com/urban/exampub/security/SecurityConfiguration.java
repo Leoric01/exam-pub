@@ -1,6 +1,5 @@
 package com.urban.exampub.security;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,15 +18,15 @@ public class SecurityConfiguration {
     return http.authorizeHttpRequests(
             authorizeHttpRequest -> authorizeHttpRequest
                     .requestMatchers(HttpMethod.GET,"/summary/**").hasAuthority("ROLE_ADMIN")
-                    .requestMatchers(HttpMethod.GET,"/users").permitAll()
-                    .requestMatchers(HttpMethod.GET,"/users/**").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/users").hasAuthority("ROLE_USER")
+                    .requestMatchers(HttpMethod.GET,"/users/**").hasAuthority("ROLE_USER")
                     .requestMatchers(HttpMethod.POST,"/user").permitAll()
                     .requestMatchers(HttpMethod.GET,"/drink-menu").permitAll()
                     .requestMatchers(HttpMethod.POST,"/buy").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/drink").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/create-buy").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/loign").permitAll()
-                    // disallow everything else if we forget to define some endpoint
+                    .requestMatchers(HttpMethod.POST,"/drink").hasAuthority("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.POST,"/create-buy").hasAuthority("ROLE_USER")
+                    .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                    // disallow everything else if we forgot to include some endpoint
                     .anyRequest().authenticated()
             )
             .csrf(AbstractHttpConfigurer::disable)

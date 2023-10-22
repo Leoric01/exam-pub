@@ -20,7 +20,7 @@ public class User {
     private String roles;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Order> orders;
-
+    //There should be at least one default User with role ADMIN, to chain multiple roles just add space like: roles = "ADMIN USER MODERATOR"
     public User() {
         this.roles = "USER";
     }
