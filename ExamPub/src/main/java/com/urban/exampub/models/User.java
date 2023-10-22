@@ -17,10 +17,12 @@ public class User {
     private boolean isAdult;
     private double pocket;
     private String password;
+    private String roles;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public User() {
+        this.roles = "USER";
     }
 
     public User(String name, boolean isActive, boolean isAdult, double pocket, List<Order> orders) {
@@ -29,6 +31,7 @@ public class User {
         this.isAdult = isAdult;
         this.pocket = pocket;
         this.orders = orders;
+        this.roles = "USER";
     }
 
     public void setId(Long id) {
@@ -87,4 +90,11 @@ public class User {
         this.orders = orders;
     }
 
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 }
