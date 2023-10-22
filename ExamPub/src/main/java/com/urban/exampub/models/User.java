@@ -22,7 +22,7 @@ public class User {
     private List<Order> orders;
 
     public User() {
-        this.roles = "ADMIN USER";
+        this.roles = "USER";
     }
 
     public User(String name, boolean isActive, boolean isAdult, double pocket, List<Order> orders) {
@@ -31,7 +31,7 @@ public class User {
         this.isAdult = isAdult;
         this.pocket = pocket;
         this.orders = orders;
-        this.roles = "ADMIN USER";
+        this.roles = "USER";
     }
 
     public void setId(Long id) {
