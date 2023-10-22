@@ -6,6 +6,7 @@ import com.urban.exampub.models.User;
 import com.urban.exampub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +16,12 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @Autowired
-  public UserServiceImpl(UserRepository userRepository) {
+  public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -80,10 +83,14 @@ public class UserServiceImpl implements UserService {
     if (userRequestDto.getPocket() == null){
       return ResponseEntity.status(400).body(new ErrorResponse("pocket is required"));
     }
+    if (userRequestDto.getPassword() == null || userRequestDto.getPassword().isBlank()){
+      return ResponseEntity.status(400).body(new ErrorResponse("password is required"));
+    }
     User user = new User();
     user.setName(userRequestDto.getName());
     user.setAdult(userRequestDto.getIsAdult());
     user.setPocket(userRequestDto.getPocket());
+    user.setPassword(this.passwordEncoder.encode(userRequestDto.getPassword()));
     userRepository.save(user);
     return ResponseEntity.status(201).body(new UserDto(user.getId(), user.getName(), user.isAdult(), user.getPocket()));
   }

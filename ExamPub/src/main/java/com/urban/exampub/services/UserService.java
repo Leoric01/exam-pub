@@ -17,4 +17,5 @@ public interface UserService {
     ResponseEntity<?> getUserDetail(Long id);
 
     ResponseEntity<?> createUser(UserRequestDto userRequestDto);
+
 }
