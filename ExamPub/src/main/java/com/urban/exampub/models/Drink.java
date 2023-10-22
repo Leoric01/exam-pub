@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 public class Drink extends Product{
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private boolean isForAdult;
 
     public Drink() {
@@ -14,10 +16,15 @@ public class Drink extends Product{
         super(productName, price);
         this.isForAdult = isForAdult;
     }
-    @Id
+
     public Long getId() {
-        return super.getId();
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public boolean isForAdult() {
         return isForAdult;
     }
@@ -25,5 +32,4 @@ public class Drink extends Product{
     public void setForAdult(boolean forAdult) {
         isForAdult = forAdult;
     }
-
 }

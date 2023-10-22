@@ -10,6 +10,13 @@ public class UserDto {
     public UserDto() {
     }
 
+    public UserDto(Long id, String name, boolean isAdult, double pocket) {
+        this.id = id;
+        this.name = name;
+        this.isAdult = isAdult;
+        this.pocket = pocket;
+    }
+
     public UserDto(Long id, String name, boolean isActive, boolean isAdult, double pocket) {
         this.id = id;
         this.name = name;

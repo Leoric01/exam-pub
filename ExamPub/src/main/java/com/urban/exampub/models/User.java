@@ -17,7 +17,7 @@ public class User {
     private boolean isAdult;
     private double pocket;
     private String password;
-    @OneToMany
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public User() {

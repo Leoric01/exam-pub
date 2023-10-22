@@ -15,6 +15,7 @@ public class Order {
 
     private double price;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Order() {

@@ -1,5 +1,6 @@
 package com.urban.exampub.services;
 
+import com.urban.exampub.models.DTOs.DrinkRequestDto;
 import com.urban.exampub.models.DTOs.summaryall.DrinkSummaryAll;
 import com.urban.exampub.models.Drink;
 import org.springframework.http.ResponseEntity;
@@ -15,5 +16,6 @@ public interface DrinkService {
 
     ResponseEntity<?> summaryAllProducts();
 
+    ResponseEntity<?> createDrink(DrinkRequestDto drinkRequestDto);
 }
 

@@ -1,5 +1,6 @@
 package com.urban.exampub.services;
 
+import com.urban.exampub.models.DTOs.UserRequestDto;
 import com.urban.exampub.models.DTOs.UsersDto;
 import com.urban.exampub.models.User;
 import org.springframework.http.ResponseEntity;
@@ -14,4 +15,6 @@ public interface UserService {
     List<User> getAllUser();
 
     ResponseEntity<?> getUserDetail(Long id);
+
+    ResponseEntity<?> createUser(UserRequestDto userRequestDto);
 }

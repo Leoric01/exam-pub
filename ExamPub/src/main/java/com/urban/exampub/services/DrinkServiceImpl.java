@@ -1,5 +1,7 @@
 package com.urban.exampub.services;
 
+import com.urban.exampub.models.DTOs.DrinkRequestDto;
+import com.urban.exampub.models.DTOs.DrinkResponseDto;
 import com.urban.exampub.models.DTOs.OrderDto;
 import com.urban.exampub.models.DTOs.summaryall.DrinkSummaryAll;
 import com.urban.exampub.models.DTOs.summaryproduct.ProductAllOrdersDto;
@@ -41,12 +43,11 @@ public class DrinkServiceImpl implements DrinkService {
     Map<String, DrinkSummaryAll> drinkSummaryMap = new HashMap<>();
     for (Order order : orderList) {
       String productName = order.getProductName();
-      OrderDto orderDto = new OrderDto(order.getId(),order.getProductName(),order.getAmount(),order.getPrice());
+      OrderDto orderDto = new OrderDto(order.getId(), order.getProductName(), order.getAmount(), order.getPrice()*order.getAmount());
       if (drinkSummaryMap.containsKey(productName)) {
         DrinkSummaryAll existingSummary = drinkSummaryMap.get(productName);
         existingSummary.setAmount(existingSummary.getAmount() + order.getAmount());
-        existingSummary.setSummaryPrice(
-            existingSummary.getSummaryPrice() + (order.getAmount() * order.getPrice()));
+        existingSummary.setSummaryPrice(existingSummary.getSummaryPrice() + (order.getAmount() * order.getPrice()));
         existingSummary.getOrders().add(orderDto);
       } else {
         List<OrderDto> orderDtos = new ArrayList<>();
@@ -67,18 +68,43 @@ public class DrinkServiceImpl implements DrinkService {
   @Override
   public ResponseEntity<List<ProductAllOrdersDto>> summaryAllProducts() {
     List<Order> orderList = orderRepository.findAll();
-    Map<String, List<Order>> ordersByProduct = orderList.stream()
-            .collect(Collectors.groupingBy(Order::getProductName));
+    Map<String, List<Order>> ordersByProduct =
+        orderList.stream().collect(Collectors.groupingBy(Order::getProductName));
     List<ProductAllOrdersDto> productAllOrdersDtos = new ArrayList<>();
     for (Map.Entry<String, List<Order>> entry : ordersByProduct.entrySet()) {
       String productName = entry.getKey();
       List<Order> productOrders = entry.getValue();
-      List<ProductSpecificSummary> productSpecificSummaries = productOrders.stream()
-              .map(order -> new ProductSpecificSummary(order.getUser().getId(), order.getAmount(), order.getPrice()))
+      List<ProductSpecificSummary> productSpecificSummaries =
+          productOrders.stream()
+              .map(
+                  order ->
+                      new ProductSpecificSummary(
+                          order.getUser().getId(), order.getAmount(), order.getPrice()))
               .collect(Collectors.toList());
-      ProductAllOrdersDto productDto = new ProductAllOrdersDto(productName, productSpecificSummaries);
+      ProductAllOrdersDto productDto =
+          new ProductAllOrdersDto(productName, productSpecificSummaries);
       productAllOrdersDtos.add(productDto);
     }
     return ResponseEntity.ok().body(productAllOrdersDtos);
+  }
+
+  @Override
+  public ResponseEntity<?> createDrink(DrinkRequestDto drinkRequestDto) {
+    if (drinkRequestDto.getName() == null || drinkRequestDto.getName().isBlank()) {
+      return ResponseEntity.status(400).body(new ErrorResponse("name required"));
+    }
+    if (drinkRequestDto.getIsForAdult() == null){
+      return ResponseEntity.status(400).body(new ErrorResponse("isForAdult required"));
+    }
+    if (drinkRequestDto.getPrice() == null){
+      return ResponseEntity.status(400).body(new ErrorResponse("price required"));
+    }
+    Drink drink = new Drink();
+    drink.setProductName(drinkRequestDto.getName());
+    drink.setPrice(drinkRequestDto.getPrice());
+    drink.setForAdult(drinkRequestDto.getIsForAdult());
+    drinkRepository.save(drink);
+    DrinkResponseDto responseDto = new DrinkResponseDto(drink.getId(), drinkRequestDto.getName(), drinkRequestDto.getPrice(), drinkRequestDto.getIsForAdult());
+    return ResponseEntity.status(201).body(responseDto);
   }
 }

@@ -1,8 +1,6 @@
 package com.urban.exampub.services;
 
-import com.urban.exampub.models.DTOs.OrderDto;
-import com.urban.exampub.models.DTOs.UsersDto;
-import com.urban.exampub.models.DTOs.UserOrderDto;
+import com.urban.exampub.models.DTOs.*;
 import com.urban.exampub.models.ErrorResponse;
 import com.urban.exampub.models.User;
 import com.urban.exampub.repositories.UserRepository;
@@ -68,6 +66,25 @@ public class UserServiceImpl implements UserService {
       return ResponseEntity.ok().body(userorderdto);
     }
     return ResponseEntity.status(404)
-        .body(new ErrorResponse("user with " + id + "id doesn't exist"));
+        .body(new ErrorResponse("user with " + id + " id doesn't exist"));
+  }
+
+  @Override
+  public ResponseEntity<?> createUser(UserRequestDto userRequestDto) {
+    if (userRequestDto.getName() == null || userRequestDto.getName().isBlank()){
+      return ResponseEntity.status(400).body(new ErrorResponse("name is required"));
+    }
+    if (userRequestDto.getIsAdult() == null){
+      return ResponseEntity.status(400).body(new ErrorResponse("isAdult is required"));
+    }
+    if (userRequestDto.getPocket() == null){
+      return ResponseEntity.status(400).body(new ErrorResponse("pocket is required"));
+    }
+    User user = new User();
+    user.setName(userRequestDto.getName());
+    user.setAdult(userRequestDto.getIsAdult());
+    user.setPocket(userRequestDto.getPocket());
+    userRepository.save(user);
+    return ResponseEntity.status(201).body(new UserDto(user.getId(), user.getName(), user.isAdult(), user.getPocket()));
   }
 }
