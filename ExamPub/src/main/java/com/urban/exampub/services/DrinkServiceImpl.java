@@ -43,13 +43,11 @@ public class DrinkServiceImpl implements DrinkService {
     Map<String, DrinkSummaryAll> drinkSummaryMap = new HashMap<>();
     for (Order order : orderList) {
       String productName = order.getProductName();
-      OrderDto orderDto =
-          new OrderDto(order.getId(), order.getProductName(), order.getAmount(), order.getPrice());
+      OrderDto orderDto = new OrderDto(order.getId(), order.getProductName(), order.getAmount(), order.getPrice()*order.getAmount());
       if (drinkSummaryMap.containsKey(productName)) {
         DrinkSummaryAll existingSummary = drinkSummaryMap.get(productName);
         existingSummary.setAmount(existingSummary.getAmount() + order.getAmount());
-        existingSummary.setSummaryPrice(
-            existingSummary.getSummaryPrice() + (order.getAmount() * order.getPrice()));
+        existingSummary.setSummaryPrice(existingSummary.getSummaryPrice() + (order.getAmount() * order.getPrice()));
         existingSummary.getOrders().add(orderDto);
       } else {
         List<OrderDto> orderDtos = new ArrayList<>();
