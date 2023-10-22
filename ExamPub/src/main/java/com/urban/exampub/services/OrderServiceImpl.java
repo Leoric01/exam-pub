@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,10 +39,7 @@ public class OrderServiceImpl implements OrderService {
     } else if (buyReq.getProductId() == null) {
       return ResponseEntity.status(400).body(new ErrorResponse("productId required"));
     } else if (buyReq.getPrice() == null) {
-      return ResponseEntity.status(400)
-          .body(
-              new ErrorResponse(
-                  "price required")); // ? price is already in product id, seems redundant to create
+      return ResponseEntity.status(400).body(new ErrorResponse("price required")); // ? price is already in product id, seems redundant to create
       // new one
     }
     Optional<User> user = userRepository.findById(buyReq.getUserId());
