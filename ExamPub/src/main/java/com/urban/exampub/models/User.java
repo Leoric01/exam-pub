@@ -34,6 +34,14 @@ public class User {
         this.roles = "USER";
     }
 
+    public User(String name, boolean isAdult, double pocket, String password, String roles) {
+        this.name = name;
+        this.isAdult = isAdult;
+        this.pocket = pocket;
+        this.password = password;
+        this.roles = roles;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
