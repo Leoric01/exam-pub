@@ -35,7 +35,9 @@ Vraci vsechny objednavky daneho produktu/drinku pro vsechny drinky a jejich celk
 i. Product 
 ii. Amount 
 iii. UnitPrice 
-iv. SummaryPrice 
+iv. SummaryPrice
+![image](https://github.com/Leoric01/exam-pub/assets/123346615/e8449f40-680f-4747-8c28-8ba45e3e083f)
+
 b. /summary/product 
 Vraci vsechny objednavky daneho drinku pro kazdy drink: 
 i. UserId 
