@@ -3,13 +3,10 @@ package com.urban.exampub.services;
 import com.jayway.jsonpath.JsonPath;
 import com.urban.exampub.models.User;
 import com.urban.exampub.repositories.UserRepository;
-import com.urban.exampub.security.SecurityConfiguration;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -36,6 +33,7 @@ class UserServiceImplTest {
     @Mock
     private UserRepository userRepository;
 
+    //works when I cancel auth in security filter chain, ain't sure how to implement basic auth into test
     @Test
     void getAllUserDto() throws Exception {
         List<User> testUsers = new ArrayList<>();

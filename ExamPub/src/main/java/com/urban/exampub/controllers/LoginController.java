@@ -22,8 +22,8 @@ public class LoginController {
     public ResponseEntity<?> createUser(@RequestBody UserRequestDto userRequestDto){
         return userService.createUser(userRequestDto);
     }
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserLoginRequest login){
-        return null;
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody UserLoginRequest login){
+//        return null;
+//    }
 }
