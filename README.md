@@ -1,4 +1,4 @@
-#Zadání:
+# Zadání:
 
 Cíl projektu: Vytvořit aplikaci simulující “hospodu”, která simuluje standardní chování v
 reálném světě.
